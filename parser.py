@@ -42,7 +42,7 @@ df['duration_numeric'] = df.duration.str.extract(r'([0-9]+)')
 df['coinvestigators_numeric'] = df.coinvestigators.str.extract(r'([0-9]+)')
 
 # %%
-df = df.loc[:, ['type3', 'edition', 'subpanel_code', \
+df = df.loc[:, ['id', 'type3', 'edition', 'subpanel_code', \
         'budget_numeric', 'duration_numeric', 'coinvestigators_numeric']]\
     .rename(columns={ "type3": "type", \
         'subpanel_code': 'subpanel',\
