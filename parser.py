@@ -44,7 +44,11 @@ df['coinvestigators_numeric'] = df.coinvestigators.str.extract(r'([0-9]+)')
 # %%
 df = df.loc[:, ['type3', 'edition', 'subpanel_code', \
         'budget_numeric', 'duration_numeric', 'coinvestigators_numeric']]\
-    .rename(columns={ "type3": "type" })
+    .rename(columns={ "type3": "type", \
+        'subpanel_code': 'subpanel',\
+        'budget_numeric': 'budget', \
+        'duration_numeric': 'duration',\
+        'coinvestigators_numeric': 'coinvestigators' })
 df
 
 # %%
@@ -52,6 +56,6 @@ preludium_df = df.loc[df.type == 'PRELUDIUM', :]\
     .reset_index(drop = True)
 
 # %%
-preludium_df.to_csv('data/preludium.csv')
+preludium_df.to_csv('data/preludium.csv', index = False)
 
 # %%
