@@ -21,9 +21,9 @@ def scrap_descriptors(soup):
 
 def scrap_manager(soup):
     manager_with_title = soup.select('a[title="Kliknij w link aby zobaczyć inne projekty tego kierownika"]')[0].text
-    first_upper_case_letter = re.search("[A-Z]", manager_with_title).start()
-    manager_title, manager_name = manager_with_title[:first_upper_case_letter - 1], manager_with_title[
-                                                                                    first_upper_case_letter:]
+    first_upper_case_letter = re.search("[A-ZĄĘÓŚŁŻŹĆŃ]", manager_with_title).start()
+    manager_title = manager_with_title[:first_upper_case_letter - 1]
+    manager_name = manager_with_title[first_upper_case_letter:].strip()
     return manager_title, manager_name
 
 
@@ -178,11 +178,12 @@ df_descriptors = pd.DataFrame(columns=column_names_descriptors)
 
 df = pd.read_csv("scrapers/data/preludium_url_endings.csv")
 
-for i in range(0, 4):
-    additional_info_row, key_words_row, descriptor_row = add_additional_data(df['Pages url endings'][i])
+for i in range(0, len(df)):
+    additional_info_row, key_words_rows, descriptor_rows = add_additional_data(df['Pages url endings'][i])
     df_additional_info = df_additional_info.append(additional_info_row, ignore_index=True)
-    df_key_words = df_key_words.append(key_words_row, ignore_index=True)
-    df_descriptors = df_descriptors.append(descriptor_row, ignore_index=True)
+    df_key_words = df_key_words.append(key_words_rows, ignore_index=True)
+    df_descriptors = df_descriptors.append(descriptor_rows, ignore_index=True)
+    print(i)
 
 df_additional_info.to_csv("data/preludium_additional_info.csv", index=False)
 df_key_words.to_csv("data/preludium_key_words.csv", index=False)
