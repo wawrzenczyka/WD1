@@ -40,4 +40,4 @@ for group in groups:
 
 
 df = pd.DataFrame({'Pages url endings': preludium_pages})
-df.to_csv('preludium_url_endings.csv', index=False, encoding='utf-8')
+df.to_csv('scrapers/data/preludium_url_endings.csv', index=False, encoding='utf-8')
