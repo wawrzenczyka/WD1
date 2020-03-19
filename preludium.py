@@ -4,23 +4,27 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-df = pd.read_csv('data/preludium.csv')
-df
+preludium = pd.read_csv('data/preludium.csv')
+preludium
 
 # %%
-sns.boxplot(df.edition, df.budget)
+sns.boxplot(preludium.edition, preludium.budget)
+plt.show()
 
 # %%
-sns.boxplot(df.loc[(df.edition != 1) & (df.edition != 2), :].edition, df.budget)
+sns.boxplot(preludium.loc[(preludium.edition != 1) & (preludium.edition != 2), :].edition, preludium.budget)
+plt.show()
 
 # %%
-plt.hist(df.edition, bins=len(np.unique(df.edition)),\
+plt.hist(preludium.edition, bins=len(np.unique(preludium.edition)),\
     rwidth=0.85)
+plt.show()
 
 # %%
-count_by_edition = df.groupby(df.edition).size()\
+count_by_edition = preludium.groupby(preludium.edition).size()\
     .reset_index(drop = False)\
     .rename(columns = { 0: 'count' })
 sns.barplot(count_by_edition.edition, count_by_edition['count'])
+plt.show()
 
 # %%
