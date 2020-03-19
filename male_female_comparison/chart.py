@@ -31,15 +31,29 @@ sns.barplot(x = 'edition', y = 'Count', hue = 'Sex', \
     data = count_by_edition)
 plt.xlabel('Edition')
 plt.ylabel('Grant count')
+plt.title('Grant count over the years, split by sex')
 plt.savefig('count_by_edition_sex.svg', \
-    format = 'svg')
+    format = 'svg', bbox_inches='tight')
 
 # %%
 sns.barplot(x = 'edition', y = 'MeanBudget', hue = 'Sex', \
     data = budget_by_edition)
 plt.xlabel('Edition')
 plt.ylabel('Mean budget per grant')
+plt.title('Mean grant budget over the years, split by sex')
 plt.savefig('mean_budget_by_edition_sex.svg', \
-    format = 'svg')
+    format = 'svg', bbox_inches='tight')
+
+# %%
+df2 = df\
+    .groupby(['Voivodeship', 'Sex'])\
+    .mean()\
+    .budget\
+    .rename('Budget')\
+    .reset_index(drop = False)\
+    .sort_values('Budget', ascending = False)
+sns.barplot(x = 'Voivodeship', y = 'Budget', \
+    data = df2)
+plt.xticks(rotation=90)
 
  # %%
