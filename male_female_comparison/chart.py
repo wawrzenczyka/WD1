@@ -44,16 +44,4 @@ plt.title('Mean grant budget over the years, split by sex')
 plt.savefig('mean_budget_by_edition_sex.svg', \
     format = 'svg', bbox_inches='tight')
 
-# %%
-df2 = df\
-    .groupby(['Voivodeship', 'Sex'])\
-    .mean()\
-    .budget\
-    .rename('Budget')\
-    .reset_index(drop = False)\
-    .sort_values('Budget', ascending = False)
-sns.barplot(x = 'Voivodeship', y = 'Budget', \
-    data = df2)
-plt.xticks(rotation=90)
-
  # %%
