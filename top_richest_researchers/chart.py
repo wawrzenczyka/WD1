@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+plt.style.use('ggplot')
 df = pd.read_csv(r'C:\Users\ulano\source\repos\WD1\data\preludium_with_additional_info.csv')
 
 managers_with_budget = df.groupby(['manager'])['budget'].sum().reset_index(name='budget')
@@ -20,6 +20,7 @@ managers_all.reset_index(drop=True)
 
 best = managers_all.tail(10)
 best = best.reset_index(drop=True)
+best = best.sort_values(by=['budget'], ascending=False)
 
 by_best = sns.barplot(x='manager', y='budget', data=best)
 plt.xlabel('Manager')
