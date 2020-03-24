@@ -77,7 +77,7 @@ plt.savefig('grant_count_map.svg', format = 'svg',
 pl_voi_budget = pl_voi.merge(budget_per_voivodeship, \
     left_on = 'JPT_NAZWA_',\
     right_on = 'voivodeship')
-    
+
 fig, ax = plt.subplots(1, figsize=(8, 8))
 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -95,6 +95,5 @@ ax.set_aspect(4./3)
 ax.axis('off')
 plt.savefig('mean_budget_map.svg', format = 'svg',
     bbox_inches='tight')
-
 
 # %%
