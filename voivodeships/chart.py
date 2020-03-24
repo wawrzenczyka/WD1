@@ -69,7 +69,8 @@ pl_voi_count.plot(ax=ax, edgecolor='0.0', linewidth=0.5,
 # ax.set_aspect('equal')
 ax.set_aspect(4./3)
 ax.axis('off')
-plt.savefig('grant_count_map.svg', format = 'svg')
+plt.savefig('grant_count_map.svg', format = 'svg',
+    bbox_inches='tight')
 
 
 # %%
@@ -92,7 +93,8 @@ pl_voi_budget.plot(ax=ax, edgecolor='0.0', linewidth=0.5,
 # ax.set_aspect('equal')
 ax.set_aspect(4./3)
 ax.axis('off')
-plt.savefig('mean_budget_map.svg', format = 'svg')
+plt.savefig('mean_budget_map.svg', format = 'svg',
+    bbox_inches='tight')
 
 
 # %%
