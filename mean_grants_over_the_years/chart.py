@@ -16,11 +16,11 @@ mean_budget_by_edition = preludium\
 sns.barplot(x = 'edition', y = 'budget', \
     data = mean_budget_by_edition, \
     color = '#e12647')
-plt.xlabel('PRELUDIUM edition')
-plt.ylabel('Mean budget per grant')
-title = plt.title('Mean grant budget over the years')
+plt.xlabel('edycja PRELUDIUM')
+plt.ylabel('średni budżet grantów')
+# title = plt.title('Mean grant budget over the years')
 
-plt.setp(title, color='#545454')
+# plt.setp(title, color='#545454')
 ax = plt.gca()
 # ax.spines['bottom'].set_color('#545454')
 # ax.spines['top'].set_color('#545454')
