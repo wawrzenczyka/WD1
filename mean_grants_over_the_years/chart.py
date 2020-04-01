@@ -13,11 +13,14 @@ mean_budget_by_edition = preludium\
     .reset_index(drop = False)\
     .loc[:, ['edition', 'budget']]
 
+mean_budget_by_edition['budget'] = \
+    mean_budget_by_edition.budget / 1000
+
 sns.barplot(x = 'edition', y = 'budget', \
     data = mean_budget_by_edition, \
     color = '#e12647')
-plt.xlabel('edycja PRELUDIUM')
-plt.ylabel('średni budżet grantów')
+plt.xlabel('Edycja PRELUDIUM')
+plt.ylabel('Średnia wysokość grantu (tys. zł)')
 # title = plt.title('Mean grant budget over the years')
 
 # plt.setp(title, color='#545454')
@@ -41,5 +44,46 @@ plt.savefig('mean_budget_by_edition.svg', \
 plt.savefig('mean_budget_by_edition.png', \
     format = 'png', bbox_inches='tight', \
     transparent = True, dpi = 300)
+
+# %%
+mean_budget_by_edition = preludium\
+    .groupby(preludium.edition)\
+    .mean()\
+    .reset_index(drop = False)\
+    .loc[:, ['edition', 'budget']]
+
+mean_budget_by_edition['budget'] = \
+    mean_budget_by_edition.budget / 1000
+
+sns.barplot(x = 'edition', y = 'budget', \
+    data = mean_budget_by_edition, \
+    color = '#e12647')
+plt.xlabel('Edycja PRELUDIUM')
+plt.ylabel('Średnia wysokość grantu (tys. zł)')
+# title = plt.title('Mean grant budget over the years')
+
+# plt.setp(title, color='#545454')
+ax = plt.gca()
+# ax.spines['bottom'].set_color('#545454')
+# ax.spines['top'].set_color('#545454')
+# ax.spines['left'].set_color('#545454')
+# ax.spines['right'].set_color('#545454')
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.xaxis.label.set_color('#545454')
+ax.yaxis.label.set_color('#545454')
+ax.tick_params(axis='x', colors='#545454')
+ax.tick_params(axis='y', colors='#545454')
+
+ax.set_axisbelow(True)
+ax.yaxis.grid(color='gray', linestyle='dashed')
+
+plt.savefig('mean_budget_by_edition_v2.svg', \
+    format = 'svg', bbox_inches='tight', \
+    transparent = True)
+plt.savefig('mean_budget_by_edition_v2.png', \
+    format = 'png', bbox_inches='tight', \
+    transparent = True, dpi = 300)
+
 
 # %%

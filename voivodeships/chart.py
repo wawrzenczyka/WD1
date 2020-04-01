@@ -20,6 +20,9 @@ ax = sns.barplot(x = 'voivodeship', y = 'budget', \
 ax.set_xticklabels(ax.get_xticklabels(), \
     rotation=45, horizontalalignment='right')
 
+budget_per_voivodeship['budget'] = \
+    budget_per_voivodeship.budget / 1000
+
 # %%
 count_per_voivodeship = df\
     .groupby('voivodeship')\
@@ -99,7 +102,7 @@ cmap = sns.cubehelix_palette(light=1, as_cmap=True)
 pl_voi_budget.plot(ax=ax, edgecolor='0.0', linewidth=0.5, 
                   column='budget', cmap=cmap, cax=cax,
                   legend=True, 
-                  legend_kwds={'label': "Średni budżet grantów"})
+                  legend_kwds={'label': "Średnia wysokość grantu (tys. zł)"})
 
 # ax.set_aspect('equal')
 ax.set_aspect(4./3)
@@ -116,5 +119,42 @@ plt.savefig('mean_budget_map.svg', format = 'svg',
 plt.savefig('mean_budget_map.png', format = 'png',
     bbox_inches='tight', \
     transparent = True, dpi = 300)
+
+# %%
+pl_voi_budget = pl_voi.merge(budget_per_voivodeship, \
+    left_on = 'JPT_NAZWA_',\
+    right_on = 'voivodeship')
+
+fig, ax = plt.subplots(1, figsize=(8, 8))
+
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+
+divider = make_axes_locatable(ax)
+cax = divider.append_axes("right", size="5%", pad=0.1)
+
+from matplotlib.colors import LinearSegmentedColormap
+cmap = LinearSegmentedColormap.from_list('custom gray', \
+    ['#ffffff', '#545454'])
+pl_voi_budget.plot(ax=ax, edgecolor='0.0', linewidth=0.5, 
+                  column='budget', cmap=cmap, cax=cax,
+                  legend=True, 
+                  legend_kwds={'label': "Średnia wysokość grantu (tys. zł)"})
+
+# ax.set_aspect('equal')
+ax.set_aspect(4./3)
+ax.axis('off')
+
+ax.xaxis.label.set_color('#545454')
+ax.yaxis.label.set_color('#545454')
+ax.tick_params(axis='x', colors='#545454')
+ax.tick_params(axis='y', colors='#545454')
+
+plt.savefig('mean_budget_map_v2.svg', format = 'svg',
+    bbox_inches='tight', \
+    transparent = True)
+plt.savefig('mean_budget_map_v2.png', format = 'png',
+    bbox_inches='tight', \
+    transparent = True, dpi = 300)
+
 
 # %%
