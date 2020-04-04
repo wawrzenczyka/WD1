@@ -182,13 +182,12 @@ plt.xlabel('Płeć')
 plt.ylabel('Średnia wysokość grantu (tys. zł)')
 
 ax = plt.gca()
-sns.despine(left = True, top = True, right = True)
 ax.spines['bottom'].set_color('gray')
+sns.despine(left = True, top = True, right = True)
+ax.tick_params(axis='both', which='both', length=0)
 
 ax.set_axisbelow(True)
 ax.yaxis.grid(color='gray', linestyle='solid')
-
-ax.tick_params(axis='both', which='both', length=0)
 
 plt.savefig('budget_by_sex_bar_v3.png', \
     format = 'png', bbox_inches='tight', \
