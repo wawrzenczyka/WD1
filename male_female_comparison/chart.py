@@ -137,7 +137,7 @@ budget_by_sex['MeanBudget'] = \
     budget_by_sex['MeanBudget'] / 1000
 
 import matplotlib.pyplot as plt
-
+sns.set_style("whitegrid")
 sns.barplot(x = 'Sex', y = 'MeanBudget', \
     palette = ['#E12647', '#798897'], \
     data = budget_by_sex)
@@ -149,10 +149,48 @@ ax = plt.gca()
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 
-ax.set_axisbelow(True)
-ax.yaxis.grid(color='gray', linestyle='dashed')
+# ax.set_axisbelow(True)
+# ax.yaxis.grid(color='gray', linestyle='dashed')
 
 plt.savefig('budget_by_sex_bar_v2.png', \
+    format = 'png', bbox_inches='tight', \
+    transparent = True, dpi = 300)
+
+# %%
+budget_by_sex = df\
+    .groupby(['Sex'])\
+    .mean()\
+    .budget\
+    .rename('MeanBudget')\
+    .reset_index(drop = False)
+budget_by_sex['Sex'] = \
+    np.where(budget_by_sex['Sex'] == 'Male', \
+        'Mężczyźni', \
+        'Kobiety')
+
+budget_by_sex['MeanBudget'] = \
+    budget_by_sex['MeanBudget'] / 1000
+
+import matplotlib.pyplot as plt
+sns.reset_defaults()
+# sns.set_style("whitegrid")
+sns.barplot(x = 'Sex', y = 'MeanBudget', \
+    palette = ['#E12647', '#798897'], \
+    data = budget_by_sex)
+
+plt.xlabel('Płeć')
+plt.ylabel('Średnia wysokość grantu (tys. zł)')
+
+ax = plt.gca()
+sns.despine(left = True, top = True, right = True)
+ax.spines['bottom'].set_color('gray')
+
+ax.set_axisbelow(True)
+ax.yaxis.grid(color='gray', linestyle='solid')
+
+ax.tick_params(axis='both', which='both', length=0)
+
+plt.savefig('budget_by_sex_bar_v3.png', \
     format = 'png', bbox_inches='tight', \
     transparent = True, dpi = 300)
 
