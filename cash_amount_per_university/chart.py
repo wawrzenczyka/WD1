@@ -16,15 +16,20 @@ sums = df \
     .reset_index()
 
 sums['budget'] = sums['budget'].div(1000000)
+
+sums = sums \
+    .replace("Akademia Górniczo-Hutnicza im. Stanisława Staszica w Krakowie", value="Akademia Górniczo-Hutnicza w Krakowie") \
+    .replace("Uniwersytet im. Adama Mickiewicza w Poznaniu", value="Uniwersytet im. A. Mickiewicza w Poznaniu")
+
 sns.set_style("whitegrid")
 sns.barplot(x='budget', y='correct_name', data=sums, color='#e12647')
-plt.ylabel('Jednostka')
 plt.xlabel('Suma grantów [mln zł]')
 
 # title = 'Jednostki o najwyższej sumie przydzielonych grantów'
 # plt.setp(title, color='#545454')
 
 ax = plt.gca()
+ax.yaxis.label.set_visible(False)
 ax.spines['bottom'].set_visible(False)
 ax.spines['left'].set_visible(False)
 ax.spines['top'].set_visible(False)
